@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <script>
+        // Validação dinâmica da confirmação de senha
+        function validarSenha() {
+            const senha = document.getElementById("senha").value;
+            const confirmarSenha = document.getElementById("confirmar_senha").value;
+            const mensagemErro = document.getElementById("erro_senha");
+
+            if (senha !== confirmarSenha) {
+                mensagemErro.textContent = "As senhas não coincidem.";
+                mensagemErro.style.color = "red";
+                return false;
+            } else {
+                mensagemErro.textContent = "As senhas coincidem.";
+                mensagemErro.style.color = "green";
+                return true;
+            }
+        }
+
+        // Mostrar mensagem de sucesso no envio
+        function enviarFormulario(event) {
+            if (!validarSenha()) {
+                event.preventDefault();
+                alert("Por favor, corrija os erros antes de enviar.");
+            } else {
+                alert("Cadastro realizado com sucesso!");
+            }
+        }
+
+        // Preenchimento automático de exemplo
+        function preencherExemplo() {
+            // Dados pessoais
+            document.getElementById("nome").value = "João da Silva";
+            document.getElementById("cpf").value = "123.456.789-00";
+            document.getElementById("email").value = "joao.silva@email.com";
+            document.getElementById("telefone").value = "(51) 99999-9999";
+            document.getElementById("masculino").checked = true;
+
+            // Endereço
+            document.getElementById("logradouro").value = "Rua das Flores";
+            document.getElementById("numero").value = "123";
+            document.getElementById("complemento").value = "Apartamento 101";
+            document.getElementById("estado").value = "RS"; // Rio Grande do Sul
+            document.getElementById("cidade").value = "Porto Alegre";
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="row g-3 align-items-center">
+            <h1>Minimercado</h1>
+        </div>
+        <nav>
+            <a href="index.html">Início</a> |
+            <a href="frutas_verduras.html">Frutas e Verduras</a>
+            <a href="nao_pereciveis.html">Não Perecíveis</a>
+            <a href="higiene_limpeza.html">Higiene e Limpeza</a> |
+            <a href="servicos.html">Serviços</a> |
+            <a href="cadastro.html">Cadastro</a> |
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Corpo da Página -->
+    <main>
+        <h2>Cadastro do Cliente</h2>
+        <p class="text-center">Para retirada no local ou tele-entrega, você precisa concluir o seu cadastro.</p>
+        <form action="javascript:void(0);" method="post">
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required><br>
+
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00"
+                            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required><br>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@email.com" required><br>
+                    </div>
+                </div>
+
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX"
+                            pattern="\(\d{2}\) \d{5}-\d{4}" required><br>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefone">Celular:</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX"
+                            pattern="\(\d{2}\) \d{5}-\d{4}" required><br>
+                    </div>
+                </div>
+
+
+
+                <label>Sexo:</label><br>
+                <div class="d-flex align-items-center">
+                    <input type="radio" id="masculino" name="sexo" value="Masculino" class="form-check-input me-2"
+                        required>
+                    <label for="masculino" class="form-check-label">Masculino</label>
+                </div>
+                <div class="d-flex align-items-center">
+                    <input type="radio" id="feminino" name="sexo" value="Feminino" class="form-check-input me-2">
+                    <label for="feminino" class="form-check-label">Feminino</label><br>
+                </div>
+                <div class="d-flex align-items-center">
+                    <input type="radio" id="outro" name="sexo" value="Outro" class="form-check-input me-2">
+                    <label for="outro" class="form-check-label">Outro</label><br>
+                </div>
+
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Endereço para Entrega</legend>
+
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-8">
+                        <label for="logradouro">Logradouro:</label>
+                        <input type="text" id="logradouro" name="logradouro" placeholder="Ex.: Rua das Flores" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="numero">Número:</label>
+                        <input type="text" id="numero" name="numero" placeholder="Ex.: 123" required><br>
+                    </div>
+                </div>
+
+                <label for="complemento">Complemento:</label>
+                <input type="text" id="complemento" name="complemento" placeholder="Ex.: Apartamento 101, Bloco 01"><br>
+
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <label for="estado">Estado (UF):</label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">AC - Acre</option>
+                            <option value="AL">AL - Alagoas</option>
+                            <option value="AP">AP - Amapá</option>
+                            <option value="AM">AM - Amazonas</option>
+                            <option value="BA">BA - Bahia</option>
+                            <option value="CE">CE - Ceará</option>
+                            <option value="DF">DF - Distrito Federal</option>
+                            <option value="ES">ES - Espírito Santo</option>
+                            <option value="GO">GO - Goiás</option>
+                            <option value="MA">MA - Maranhão</option>
+                            <option value="MT">MT - Mato Grosso</option>
+                            <option value="MS">MS - Mato Grosso do Sul</option>
+                            <option value="MG">MG - Minas Gerais</option>
+                            <option value="PA">PA - Pará</option>
+                            <option value="PB">PB - Paraíba</option>
+                            <option value="PR">PR - Paraná</option>
+                            <option value="PE">PE - Pernambuco</option>
+                            <option value="PI">PI - Piauí</option>
+                            <option value="RJ">RJ - Rio de Janeiro</option>
+                            <option value="RN">RN - Rio Grande do Norte</option>
+                            <option value="RS">RS - Rio Grande do Sul</option>
+                            <option value="RO">RO - Rondônia</option>
+                            <option value="RR">RR - Roraima</option>
+                            <option value="SC">SC - Santa Catarina</option>
+                            <option value="SP">SP - São Paulo</option>
+                            <option value="SE">SE - Sergipe</option>
+                            <option value="TO">TO - Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" name="cidade" placeholder="Ex.: Porto Alegre" required><br>
+                    </div>
+                </div>
+
+
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Preferências</legend>
+                <label>Gostaria de receber promoções?</label><br>
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" id="promocoes" name="promocoes" value="Sim" class="form-check-input me-2">
+                    <label for="promocoes" class="form-check-label">Sim</label><br>
+                </div>
+
+                <label>Como prefere ser contatado?</label><br>
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" id="contato_email" name="contato[]" value="E-mail"
+                        class="form-check-input me-2">
+                    <label for="contato_email" class="form-check-label">E-mail</label>
+                </div>
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" id="contato_telefone" name="contato[]" value="Telefone"
+                        class="form-check-input me-2">
+                    <label for="contato_telefone" class="form-check-label">Telefone</label>
+                </div>
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" id="contato_whatsapp" name="contato[]" value="WhatsApp"
+                        class="form-check-input me-2">
+                    <label for="contato_whatsapp" class="form-check-label">WhatsApp</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Acesso</legend>
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirmar_senha">Confirmar Senha:</label>
+                        <input type="password" id="confirmar_senha" name="confirmar_senha"
+                            placeholder="Confirme sua senha" required>
+                    </div>
+                </div>
+
+
+
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+            <button type="button" onclick="preencherExemplo()" class="btn btn-light">Preencher Exemplo</button>
+        </form>
+        </form>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2024 Minimercado</p>
+        <p>Contato: email@minimercado.com.xx | (51) 9999-9999</p>
+    </footer>
+
+</body>
+
+</html>

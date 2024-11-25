@@ -1,11 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serviços</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script>
+        function atualizarHorarioDisponivel() {
+            const tipoServico = document.querySelector('input[name="tipo_servico"]:checked').value;
+            const horarioFieldset = document.getElementById("horarios");
+            const horarioLabel = document.getElementById("label_horario");
+
+            if (tipoServico === "Retirada") {
+                horarioLabel.textContent = "Escolha o horário de retirada:";
+                horarioFieldset.disabled = false;
+            } else if (tipoServico === "Entrega") {
+                horarioLabel.textContent = "Escolha o horário de entrega (a partir das 12h):";
+                horarioFieldset.disabled = false;
+            }
+        }
+
+        function validarAgendamento(event) {
+            const tipoServico = document.querySelector('input[name="tipo_servico"]:checked');
+            const data = document.getElementById("data").value;
+            const horario = document.getElementById("horario").value;
+
+            if (!tipoServico) {
+                alert("Por favor, selecione o tipo de serviço.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (!data || !horario) {
+                alert("Por favor, escolha a data e o horário.");
+                event.preventDefault();
+                return false;
+            }
+
+            alert("Agendamento realizado com sucesso!");
+            window.location.href = "cadastro.html"; // Redireciona para a página de cadastro
+        }
+    </script>
+
 </head>
+
 <body>
     <header>
         <h1>Minimercado</h1>
@@ -15,6 +55,7 @@
             <a href="nao_pereciveis.html">Não Perecíveis</a>
             <a href="higiene_limpeza.html">Higiene e Limpeza</a> |
             <a href="servicos.html">Serviços</a> |
+            <a href="cadastro.html">Cadastro</a> |
             <a href="contato.html">Contato</a>
         </nav>
     </header>
@@ -24,16 +65,40 @@
         <!-- Serviços -->
         <section id="servicos">
             <h2>Serviços</h2>
-            <h3>Retirada no Local</h3>
-            <div>
-                <p>Endereço: Rua das Flores, 123, Porto Alegre, RS.</p>
-                <p>Valor: R$ 5,00</p>
-            </div>
-            <h3>Tele-entrega</h3>
-            <div>                
-                <p>Entregas a partir das 12 horas (meio-dia).</p>
-                <p>Valor: R$ 10,00</p>
-            </div>
+            <form id="form_servico" action="javascript:void(0);" onsubmit="validarAgendamento(event)">
+                <fieldset>
+                    <legend>Escolha o tipo de serviço</legend>
+
+                    <div class="d-flex align-items-center">
+                        <input type="radio" id="retirada" name="tipo_servico" value="Retirada"
+                            onclick="atualizarHorarioDisponivel()" class="form-check-input me-2" required>
+                        <label for="retirada">Retirada no Local (R$ 5,00)</label><br>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <input type="radio" id="entrega" name="tipo_servico" value="Entrega"
+                            onclick="atualizarHorarioDisponivel()" class="form-check-input me-2" required>
+                        <label for="entrega">Tele-entrega (R$ 10,00)</label>
+                    </div>
+                </fieldset>
+
+                <fieldset id="data_horario" >
+                    <legend>Agendamento</legend>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-6">  
+                            <label for="data">Escolha a data:</label>
+                            <input type="date" id="data" name="data" required><br>                                  
+                        </div>
+                        <fieldset id="horarios" disabled class="col-md-6">
+                            <label id="label_horario" for="horario">Escolha o horário:</label>
+                            <input type="time" id="horario" name="horario" required>
+                        </fieldset>
+                    </div>
+                    <div class="row g-2">
+                        <label id="button" for="horario"> </label>
+                        <button type="submit" class="btn btn-primary">Agendar</button>
+                    </div>
+                </fieldset>
+            </form>
         </section>
     </main>
 
@@ -42,6 +107,7 @@
         <p>© 2024 Minimercado</p>
         <p>Contato: email@minimercado.com.xx | (51) 9999-9999</p>
     </footer>
-    
+
 </body>
+
 </html>
